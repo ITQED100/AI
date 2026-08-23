@@ -1,45 +1,62 @@
-# Authentication Standard
+# Secure Logging Standard
 
 ## Purpose
 
-This standard defines authentication and access-control expectations for applications that provide access to member and claims information.
+This standard defines logging requirements for applications that process member, claims, and other sensitive healthcare information.
 
-## Authentication Requirements
+## Logging Requirements
 
-1. Users must authenticate before accessing protected member or claims information.
+1. Applications should record operational and security events needed for troubleshooting, monitoring, and auditing.
 
-2. Applications must verify the authenticated user before returning sensitive data.
+2. Logs must not contain sensitive healthcare information, full claim details, authentication credentials, access tokens, secrets, or passwords.
 
-3. Authentication must occur before authorization decisions are made.
+3. Applications should log important events such as:
+   - Successful and failed authentication attempts
+   - Authorization failures
+   - Application errors
+   - External service failures
+   - AI or search service failures
+   - MCP tool invocation success or failure
 
-4. Authentication failures must not reveal whether a specific member, account, or claim exists.
+4. Logs should contain enough information to support troubleshooting without exposing sensitive business or member data.
 
-5. Sessions should expire after a defined period of inactivity.
+5. Where possible, applications should use non-sensitive identifiers such as correlation IDs or request IDs to trace activity across services.
 
-6. Repeated failed authentication attempts should be logged for security monitoring.
+6. Error logs should record technical failure details while avoiding unnecessary member information.
 
-## Authorization Requirements
+7. Access to application logs should be restricted to authorized personnel.
 
-1. Authentication alone does not grant access to all data.
+8. Logging failures should not expose sensitive information to the end user.
 
-2. After authentication, the application must verify that the user is authorized to access the requested resource.
+## AI Application Logging
 
-3. Members may only access claims and information associated with their own account unless additional authorization has been explicitly granted.
+For AI-enabled applications, logs may include:
 
-4. Requests for unauthorized resources must be denied.
+- Request timestamp
+- Request or correlation ID
+- Retrieval success or failure
+- Number of documents retrieved
+- Model invocation status
+- MCP tool name
+- Tool execution status
+- Response latency
 
-5. Authorization checks must be performed on the server side and must not rely only on information supplied by the client application.
+Prompts and model responses containing sensitive information should not be logged by default.
 
-## Error Handling
+## Acceptable Log Example
 
-Authentication and authorization errors should use clear but non-sensitive messages.
+RequestId=8F42A  
+Event=ClaimsPolicyRetrieval  
+DocumentsRetrieved=3  
+Status=Success
 
-Example:
+## Unacceptable Log Example
 
-> Unable to verify access to the requested information.
-
-The application should not expose internal account identifiers, security rules, or system details in authentication error messages.
+Member=Jane Smith  
+Claim=CLM-10042  
+Diagnosis=Diabetes  
+DenialReason=Treatment not medically necessary
 
 ## Example Business Rule
 
-An authenticated member requesting claim `CLM-10042` must also be verified as the owner of that claim before claim information is returned.
+The application may record that claim information was successfully retrieved, but it must not record the member's sensitive claim content in the application log.
