@@ -18,7 +18,7 @@ Each project in this folder is intended to be a practical learning exercise rath
 
 ## Current Projects
 
-### Healthcare Requirements Agent
+### [Healthcare Requirements Agent](https://github.com/ITQED100/AI/tree/main/Healthcare%20Requirements%20Agent)
 
 A healthcare-focused AI lab that explores:
 
