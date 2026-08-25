@@ -1,37 +1,27 @@
-# Screenshots
+## Screenshots
 
 This folder contains visual evidence from the Healthcare Requirements Agent lab.
 
-## 01-baseline-without-rag.png
+## Baseline Without RAG
+
+[View screenshot](01-baseline-without-rag.png)
 
 Shows the initial model response before retrieval-augmented generation was added.
 
-The response was plausible but not grounded in company policy, which demonstrated the need for RAG.
+## RAG Grounded Response
 
-## 02-rag-grounded-response.png
+[View screenshot](02-rag-grounded-response.png)
 
-Shows the grounded RAG response after Azure AI Search was connected.
+Shows the grounded response after Azure AI Search was connected.
 
-The response uses retrieved policy context and correctly denies access to another member's claim.
+## Agentic Requirements Output
 
-## 03-agentic-requirements-markdown.png
+[View screenshot](03-agentic-requirements-markdown.png)
 
-Shows structured software requirements generated after tool calling was added.
+Shows structured requirements generated after tool calling was added.
 
-The model used the requirements template tool and returned the result in a business-readable format instead of raw JSON.
+## Grounded Security Requirements With Sources
 
-## 04-grounded-security-requirements-with-sources.png
+[View screenshot](04-grounded-security-requirements-with-sources.png)
 
-Shows security and privacy requirements generated after grounding controls were tightened.
-
-Each requirement is traceable to one or more retrieved source documents.
-
-## Validation Summary
-
-The screenshots demonstrate the progression from:
-
-Baseline model output  
-→ RAG-grounded output  
-→ Tool-based requirements generation  
-→ Multi-tool selection  
-→ Source-traceable requirements
+Shows source-traceable security and privacy requirements after grounding controls were tightened.
